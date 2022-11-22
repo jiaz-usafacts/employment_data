@@ -4,9 +4,7 @@ import os
 
 #STEPS
 
-#get weighted pop for each month
-#get percentage of weighted pop for people not at work because of childcare
-#get percentage of groups within childcare
+#get total weighted pop for each month for each file
 
 #https://www.census.gov/programs-surveys/cps/technical-documentation/methodology/producing-summary-statistics.html
 def timeline(inputFile):
@@ -14,27 +12,26 @@ def timeline(inputFile):
     inputData = csv.reader(open(inputRoot+"/"+inputFile+'.csv','r'))
     for row in inputData:
         header = row
-        print(header)
+       # print(header)
         break
     formatted = {}
+    noWeightCount = 0
     for row in inputData:
         #print(row)
-        if row[header.index('prpertyp')]=='2':
-            weight = row[header.index('pwcmpwgt')]
+        if row[header.index('prpertyp')]=='2': #ADULT CIVILIAN HOUSEHOLD MEMBER
+
+            weight = row[header.index('pwcmpwgt')]#Composited Final Weight-4 decimals
             if weight !="":
                 weight = float(weight)/10000
             else:
-                weight = 0
-          #  print(weight)
-        
-     #
-     #        print( float(weight))
+                noWeightCount+=1
+               
         
        
             year = row[header.index('hryear4')]
             
             month = row[header.index('hrmonth')]
-            workStatus = row[header.index('prwksch')]
+           # workStatus = row[header.index('prwksch')]
             yearMonth = year+"-"+month
         
             if yearMonth not in formatted.keys():
@@ -46,6 +43,7 @@ def timeline(inputFile):
             else:
                # formatted[yearMonth]["interviewed"]+=1
                 formatted[yearMonth]["weighted"]+=weight
+    print("NO WEIGHT", noWeightCount)
             
     
     outputFile = open(outputRoot+"/"+inputFile+".json",'w')

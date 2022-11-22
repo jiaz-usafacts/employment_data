@@ -147,22 +147,20 @@ pemlr ={"key":"pemlr","threshold":[1,1]}
 everyone = "/Users/jzhang/Documents/whoWorks/11172022_hrinsta1_allColumns.csv"
 #over16('prtage',16,everyone)
 
-#step 1 split by not at work
+#step 1 split by employed not at work
 inputBase = "16AndOver"
 #splitByThresholds(pemlr['key'],pemlr['threshold'],'/Users/jzhang/Documents/whoWorks/11172022_hrinsta1_allColumns_16AndOver.csv',inputBase)
 
-#step 1.5 get all employed
+#step 2 all employed
 inputBase = "16AndOver"
 #splitByThresholds('prempnot',[1,1],'/Users/jzhang/Documents/whoWorks/hrinsta1_allColumns_16AndOver.csv',inputBase)
 
-
-
-# step 2 split by not at work because of parenting
+# step 3 split by not at work because of parenting
 inputBase = "pemlr-2-2"
 #splitByThresholds(peabsrsn['key'],peabsrsn['threshold'],'/Users/jzhang/Documents/whoWorks/groupings/16AndOver_pemlr-2-2.csv',inputBase)
 
 
-#step 3 split by all other
+#step 4 split by all other
 #pesex,
 #prnmchld,prchld,ptdtrace,prtage,
 allCats = [prnmchld]
